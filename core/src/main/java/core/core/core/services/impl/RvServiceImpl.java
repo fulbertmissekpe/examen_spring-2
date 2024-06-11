@@ -55,7 +55,7 @@ public class RvServiceImpl implements RvService {
         rv.setDateHeure(date);
         rv.setSpecialite(Specialite.toEnum(Integer.parseInt(data.getSpecialite())));
         rv.setMedecin(medecinRepo.findById(data.getMedecin().intValue()));
-        rv.setPatient(patientRepo.findById(data.getPatient().intValue()));
+        rv.setPatient(patientRepo.findByUsername(data.getPatient()));
         rv.setActive(true);
         rv.setValide(false);
 

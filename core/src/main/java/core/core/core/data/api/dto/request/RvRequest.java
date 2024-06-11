@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class RvRequest {
-    private Long patient;
+    private String patient;
     private Long medecin;
     private String dateHeure;
     private String specialite;
