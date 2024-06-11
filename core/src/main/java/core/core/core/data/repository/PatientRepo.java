@@ -9,5 +9,6 @@ import java.util.List;
 public interface PatientRepo extends JpaRepository<Patient,Long> {
     List<Patient> findPatientByActiveTrue();
     Patient findById(int id);
+    Patient findByUsername(String name);
 
 }

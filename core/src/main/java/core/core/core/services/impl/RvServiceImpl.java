@@ -3,6 +3,7 @@ package core.core.core.services.impl;
 
 import core.core.core.data.api.dto.request.RvRequest;
 import core.core.core.data.api.dto.response.RvDto;
+import core.core.core.data.entities.Patient;
 import core.core.core.data.entities.RV;
 import core.core.core.data.enums.Specialite;
 import core.core.core.data.repository.MedecinRepo;
@@ -39,6 +40,11 @@ public class RvServiceImpl implements RvService {
         LocalDateTime start = date.atStartOfDay();
         LocalDateTime end = date.plusDays(1).atStartOfDay();
         return repo.findByDateHeureBetween(start, end);
+    }
+
+    @Override
+    public List<RV> getRbVousByPatient(Patient patient) {
+        return repo.findAllByPatient(patient);
     }
 
     @Override

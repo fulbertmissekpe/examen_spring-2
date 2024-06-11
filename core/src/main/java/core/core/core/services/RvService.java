@@ -3,6 +3,7 @@ package core.core.core.services;
 import core.core.core.data.api.dto.request.RvRequest;
 import core.core.core.data.api.dto.response.RvDto;
 import core.core.core.data.entities.Medecin;
+import core.core.core.data.entities.Patient;
 import core.core.core.data.entities.RV;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ public interface RvService{
     void save(RV data);
     List<RV> getAll();
     List<RV> getRendezVousByDate(LocalDate date);
+    List<RV> getRbVousByPatient(Patient patient);
    void AddRv(RvRequest data);
 
 }
