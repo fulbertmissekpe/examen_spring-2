@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Liste Session</title>
+</head>
+<body>
+<div layout:fragment="contentForView">
+    <h1>Lister Des Session de Cours</h1>
+    <div class="container">
+        <div class="card col-lg-12">
+            <div class="card-body mb-2">
+                <form method="get" th:action="@{/ac/sessionCours}">
+                    <div class="form-group col-4">
+                        <label class="block mt-4">Module</label>
+                        <input type="text" class="form-control" th:value="${module}" name="module"  placeholder="Module">
+                    </div>
+                    <div class="block ml-6  mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700  focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray">
+                        <label  class="block mt-4 form-label">Date</label>
+                        <input type="date" class="form-control"  th:value="${date}" name="date" id="selectDate">
+                    </div>
+
+                    <div class="form-group col-4">
+                        <label class="block mt-4">Professeur</label>
+                        <input type="text" class="form-control" name="professeur" th:value="${professeur}"  placeholder="Professeur">
+                    </div>
+
+                    <button type="submit" class="px-3 py-4 mt-8 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                        <a  id="" class="btn btn-info float-right mt-3" role="button">Recherche</a>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="w-full mt-8 overflow-hidden rounded-lg shadow-xs">
+        <div class="w-full overflow-x-auto">
+            <table class="w-full whitespace-no-wrap">
+                <thead>
+                <tr
+                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                >
+                    <th class="px-4 py-3">ID</th>
+                    <th class="px-4 py-3">LIBELLE</th>
+                    <th class="px-4 py-3">DATE</th>
+                    <th class="px-4 py-3">HEURE DEBUT</th>
+                    <th class="px-4 py-3">HEURE FIN</th>
+                    <th class="px-4 py-3">SALLE</th>
+                    <th class="px-4 py-3">LIEU</th>
+                    <th class="px-4 py-3">ACTION</th>
+                </tr>
+                </thead>
+                <tbody
+                        class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+                >
+                <tr th:each="cl:${cours}" class="text-gray-700 dark:text-gray-400">
+                    <td class="px-4 py-3" th:text="${cl.id}">
+
+                    </td>
+                    <td class="px-4 py-3 text-xs" th:text="${cl.libelle}">
+
+                    </td>
+                    <td class="px-4 py-3 text-sm" th:text="${cl.date}">
+
+                    </td>
+                    <td class="px-4 py-3 text-sm" th:text="${cl.heureDebut}">
+
+                    </td>
+                    <td class="px-4 py-3 text-sm" th:text="${cl.heureFin}">
+                    </td>
+                    <td class="px-4 py-3 text-sm" >
+                        <span th:if="${cl.salle!=null}" th:text="${cl.salle.libelle}">
+
+                        </span>
+                    </td>
+                    <td class="px-4 py-3 text-sm"  th:text="${cl.lieu}">
+
+                    </td>
+                    <td class="px-4 py-3 text-sm">
+                        <a th:href="@{/ac/sessionCours/valider(id=${cl.id},idP=${idP})}" class="px-2 py-1 font-semibold leading-tight text-black-700 bg-green-100 rounded-full dark:text-red-100 dark:bg-red-700"  href="#" role="button">V</a>
+                        <a th:href="@{/ac/sessionCours/invalider(id=${cl.id},idP=${idP})}"  class="px-2 py-1 font-semibold leading-tight text-black-700 bg-orange-100 rounded-full dark:text--100 dark:bg-red-700"  href="#" role="button">O</a>
+                        <a th:href="@{/ac/sessionCours/annuler(id=${cl.id},idP=${idP})}"  class="px-2 py-1 font-semibold leading-tight text-black-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700"  href="#" role="button">X</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <nav aria-label="Page navigation example" class="mt-4 flex justify-center">
+            <ul class="flex gap-1 text-xs font-medium" th:if="${nbrePage>1}">
+                <li th:if="${currentPage>0}">
+                    <a th:href="@{sessionCours(page=${currentPage - 1})}" class="pagination-link">
+                        <span class="sr-only">Page précédente</span>
+                        <svg class="h-5 w-5 fill-current text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.646 4.146a.5.5 0 01.708 0l4 4a.5.5 0 010 .708l-4 4a.5.5 0 01-.708-.708L12.793 9.5H4.5a.5.5 0 010-1h8.293L8.646 5.854a.5.5 0 010-.708z" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                </li>
+                <li th:each="p,status:${pages}">
+                    <a th:text="${status.index + 1}"
+                       th:class="${status.index == currentPage ? 'pagination-link active' : 'pagination-link'}"
+                       th:href="@{sessionCours(page=${status.index})}"
+                    ></a>
+                </li>
+                <li th:if="${currentPage < nbrePage - 1}">
+                    <a th:href="@{sessionCours(page=${currentPage + 1})}" class="pagination-link">
+                        <span class="sr-only">Page suivante</span>
+                        <svg class="h-5 w-5 fill-current text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M11.354 4.146a.5.5 0 010 .708L7.707 9.5H16.5a.5.5 0 010 1H7.707l3.647 3.646a.5.5 0 01-.708.708l-4-4a.5.5 0 010-.708l4-4a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+    </div>
+</div>
+</body>
+</html>

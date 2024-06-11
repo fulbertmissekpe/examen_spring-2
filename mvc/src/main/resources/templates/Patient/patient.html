@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Liste</title>
+</head>
+<body>
+    <div layout:fragment="contentForView">
+        <h1>Liste patient</h1>
+        <div class="container">
+            <div class="card col-lg-12">
+
+
+            </div>
+        </div>
+
+
+        <div class="w-full mt-8 overflow-hidden rounded-lg shadow-xs">
+            <div class="w-full overflow-x-auto">
+                <table class="w-full whitespace-no-wrap">
+                    <thead>
+                    <tr
+                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                    >
+                        <th class="px-4 py-3">ID</th>
+                        <th class="px-4 py-3">nom</th>
+
+                    </tr>
+                    </thead>
+                    <tbody
+                            class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+                    >
+                    <tr th:each="cl:${patient}" class="text-gray-700 dark:text-gray-400">
+                        <td class="px-4 py-3" th:text="${cl.id}">
+
+                        </td>
+                        <td class="px-4 py-3 text-sm" th:text="${cl.nom}">
+
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:x-on="http://www.w3.org/1999/xhtml"
+      layout:decorate="template" >
+<head>
+    <meta charset='utf-8'/>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.11/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.11/index.global.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js" integrity="sha256-J37ZtjEw94oWBNZ9w/XC73raGXE9t10//XHJfKz2QCM=" crossorigin="anonymous"></script>
+    <script th:inline="javascript">
+        var sessions=/*[[${sessions}]]*/[]
+        console.log(sessions)
+        document.addEventListener('DOMContentLoaded', function() {
+
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+
+                initialView: 'timeGridWeek',
+                locale: 'fr',
+                timeZone: 'Afrique/Senegal',
+                headerToolbar:{
+                    start:'dayGridMonth,timeGridWeek,listWeek',
+                    center:'prev,next today',
+                    end:'title',
+                },
+                events: sessions,
+                eventRender: function(info) {
+                    var tooltip = new Tooltip(info.el, {
+                        title: info.event.extendedProps.description,
+                        placement: 'top',
+                        trigger: 'hover',
+                        container: 'body'
+                    });
+                }
+
+            });
+            calendar.render();
+        });
+    </script>
+
+</head>
+    <body>
+    <div layout:fragment="contentForView">
+        <div class="container">
+            <div class="card col-lg-12">
+                <div>
+                    <button
+                            class="px-3 py-4 mt-8 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                    >
+                        <a name="" id="" class="btn btn-info float-right mt-3"
+                           role="button">Ajouter</a>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div id='calendar' ></div>
+    </div>
+    </body>
+</html>
