@@ -12,7 +12,7 @@ import java.util.List;
 public interface RvRepo extends JpaRepository<RV,Long> {
     List<RV> findRVByActiveTrue();
     List<RV> findByDateHeureBetween(LocalDateTime start, LocalDateTime end);
-    List<RV> findAllByPatient(Patient patient);
+    List<RV> findAllByPatientAndValideTrue(Patient patient);
    // List<RV> findByPatient(Patient patient);
     //List<RV> findByMedecin(Medecin medecin);
 

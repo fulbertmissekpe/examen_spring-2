@@ -16,6 +16,7 @@ public interface RvRestController {
     ResponseEntity<Map<Object, Object>> listerRv();
     @GetMapping("/rvRest/patient/{name}")//End Point
     ResponseEntity<Map<Object, Object>> listerRvBy(@PathVariable String name);
+    
     @PostMapping("/rvRest")
     ResponseEntity<Map<Object, Object>> save(@Valid @RequestBody RvRequest rvRequest, BindingResult bindingResult);
 }

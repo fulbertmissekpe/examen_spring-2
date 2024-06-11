@@ -44,7 +44,7 @@ public class RvServiceImpl implements RvService {
 
     @Override
     public List<RV> getRbVousByPatient(Patient patient) {
-        return repo.findAllByPatient(patient);
+        return repo.findAllByPatientAndValideTrue(patient);
     }
 
     @Override
